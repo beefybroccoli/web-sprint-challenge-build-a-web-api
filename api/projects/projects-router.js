@@ -12,11 +12,10 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", middlewareProject.verifyProjectId, async (req, res) => {
   const projects = await modelProject.get();
-  res
-    .status(200)
-    .json(
-      projects.filter((element) => String(element.id) === String(req.params.id))
-    );
+  const project = projects.filter(
+    (element) => String(element.id) === String(req.params.id)
+  );
+  res.status(200).json(project[0]);
 });
 
 router.post("", middlewareProject.verifyNewProject, async (req, res) => {
