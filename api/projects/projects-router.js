@@ -49,4 +49,13 @@ router.put(
   }
 );
 
+router.get(
+  "/:id/actions",
+  middlewareProject.verifyProjectId,
+  async (req, res) => {
+    const result = await modelProject.getProjectActions(req.params.id);
+    res.status(200).json(result);
+  }
+);
+
 module.exports = router;
