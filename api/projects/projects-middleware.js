@@ -1,4 +1,3 @@
-// add middlewares here related to projects
 const modelProject = require("./projects-model");
 function verifyNewProject(req, res, next) {
   const { name, description } = req.body;

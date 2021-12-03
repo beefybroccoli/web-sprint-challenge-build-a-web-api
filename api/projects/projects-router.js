@@ -1,9 +1,8 @@
-// Write your "projects" router here!
-// Write your "actions" router here!
 const express = require("express");
 const router = express();
 const modelProject = require("./projects-model");
 const middlewareProject = require("./projects-middleware");
+const { errorHandling } = require("../middleware-errorhandler");
 
 router.get("/", async (req, res) => {
   const projects = await modelProject.get();
@@ -53,5 +52,7 @@ router.get(
     res.status(200).json(result);
   }
 );
+
+router.use(errorHandling);
 
 module.exports = router;

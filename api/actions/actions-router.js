@@ -1,8 +1,8 @@
-// Write your "actions" router here!
 const express = require("express");
 const router = express();
 const modelActions = require("./actions-model");
 const middlewareActions = require("./actions-middlware");
+const { errorHandling } = require("../middleware-errorhandler");
 
 router.get("/", async (req, res) => {
   const actions = await modelActions.get();
@@ -37,5 +37,7 @@ router.put(
     res.status(201).json(modifiedAction);
   }
 );
+
+router.use(errorHandling);
 
 module.exports = router;
