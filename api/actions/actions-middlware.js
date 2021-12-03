@@ -62,7 +62,8 @@ async function verifyProjectId(project_id) {
     project === null ||
     project === undefined ||
     project === {} ||
-    project === []
+    project === [] ||
+    !project
   ) {
     return false;
   } else {

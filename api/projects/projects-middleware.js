@@ -10,7 +10,11 @@ function verifyNewProject(req, res, next) {
   ) {
     res.status(400).json({ message: "invalid name or description" });
   } else {
-    req.newProject = { name, description, completed: false };
+    req.newProject = {
+      name,
+      description,
+      completed: req.body.completed ? req.body.completed : false,
+    };
     next();
   }
 }
