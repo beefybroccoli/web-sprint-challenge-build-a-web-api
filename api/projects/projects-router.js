@@ -36,4 +36,17 @@ router.delete("/:id", middlewareProject.verifyProjectId, async (req, res) => {
   }
 });
 
+router.put(
+  "/:id",
+  middlewareProject.verifyProjectId,
+  middlewareProject.verifyModifiedProject,
+  async (req, res) => {
+    const result = await modelProject.update(
+      req.params.id,
+      req.modifiedProject
+    );
+    res.status(201).json(result);
+  }
+);
+
 module.exports = router;

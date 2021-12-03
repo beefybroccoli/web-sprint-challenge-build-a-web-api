@@ -15,6 +15,22 @@ function verifyNewProject(req, res, next) {
   }
 }
 
+function verifyModifiedProject(req, res, next) {
+  const { name, description, completed } = req.body;
+  if (
+    !name ||
+    !description ||
+    !completed ||
+    name.trim().length === 0 ||
+    description.trim().length === 0
+  ) {
+    res.status(400).json({ message: "invalid name, description or completed" });
+  } else {
+    req.modifiedProject = { name, description, completed: Boolean(completed) };
+    next();
+  }
+}
+
 async function verifyProjectId(req, res, next) {
   try {
     const project = await modelProject.get(req.params.id);
@@ -29,4 +45,4 @@ async function verifyProjectId(req, res, next) {
   }
 }
 
-module.exports = { verifyNewProject, verifyProjectId };
+module.exports = { verifyNewProject, verifyModifiedProject, verifyProjectId };
