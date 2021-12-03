@@ -11,11 +11,7 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:id", middlewareProject.verifyProjectId, async (req, res) => {
-  const projects = await modelProject.get();
-  const project = projects.filter(
-    (element) => String(element.id) === String(req.params.id)
-  );
-  res.status(200).json(project[0]);
+  res.status(200).json(req.project);
 });
 
 router.post("", middlewareProject.verifyNewProject, async (req, res) => {
